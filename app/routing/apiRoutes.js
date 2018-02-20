@@ -6,10 +6,22 @@ module.exports = function(app) {
     });
 
     app.post("/api/friends", function(req, res) {
-        var userName = surveryResults.name
+        var perfectMatch = {
+            name: "",
+            image: "",
+            matchDifference: ""
+        };
         
-        friendDataArray.push(req.body);
+        var userResponse = req.body;
+        console.log("User Response " + JSON.stringify(userResponse));
 
-        console.log(userName);
+        var userResName = userResponse.name;
+        var userResPhoto = userResponse.photo;
+        var userResQues = userResponse.ques;
+
+        var totalDifference = 0;
+        
+        friendDataArray.push(userResponse);
+
     });
 }

@@ -7,11 +7,33 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <!-- Font Awesome CDN -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+        <!--page stylesheet -->
+        <link rel="stylesheet" type="text/css" href="../../css/stylesheet.css">
+        <style>
+            body {
+                background-color: lightgrey;
+            }
+            .title {
+                font-family: 'Press Start 2P', cursive;
+                color: #4468B0;
+            }
+            #fb_logo {
+                color: #4468B0;
+                font-size: 1.5em;
+            }
+
+            .jumbotron {
+                background-color: black;
+                color: white;
+            }
+        </style>
     </head>
     <body>
         <div class="container-fluid">
             <div class="jumbotron text-center">
-                <h1><i class="fa fa-facebook-square" aria-hidden="true"></i> Friend Finder</h1>
+                <h1><i id="fb_logo" class="fa fa-facebook-square" aria-hidden="true"></i> <span class="title">Friend Finder</span></h1>
                 <hr>
                 <h2>Answer 10 questions to be matched with your new best friend!!</h2>
                 <h2>Click "Begin Survey" to begin.</h2>
@@ -20,6 +42,7 @@
                     <a href="/survey"><button type="button" class="btn btn-lg btn-danger"><h4><span class="glyphicon glyphicon-list-alt"></span> Begin Survey</h4></button></a>
                 </div>       
             </div>
+            <a href="/api/friends">Friends API</a>
         </div>
     </body>
 </html>

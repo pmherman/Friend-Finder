@@ -1,0 +1,46 @@
+/* Homepage */
+body {
+    background-color: lightgrey;
+}
+
+#fb_logo {
+    color: #4468B0;
+    font-size: 1.5em;
+}
+
+.jumbotron {
+    background-color: black;
+    color: white;
+}
+
+/* Survey Page */
+body {
+    background-color: lightgrey; 
+}
+
+.title {
+    font-family: 'Press Start 2P', cursive;
+    color: #4468B0;
+}
+
+.chosen-select {
+    background-color: #f7f7e6;
+}
+
+.form-control {
+    width: 250px;
+    margin: auto;
+    background-color: #f7f7e6
+}
+
+#surveyQuestions {
+    background-color: lightyellow;
+    width: 60vw;
+    padding: 1px;
+    margin: auto;
+}
+
+.rules {
+    color: red;
+    font-weight: bolder;
+}
