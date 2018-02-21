@@ -45,6 +45,10 @@
                 color: red;
                 font-weight: bolder;
             }
+
+            #friendPhoto {
+                height: 320px;
+            }
        </style>
     </head>
     <body>
@@ -155,13 +159,13 @@
         <div id="resultsModal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header text-center">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Your Perfect Friend:</h4>
                 </div>
-                <div class="modal-body">
-                  <h3 id="matchName"></h3>
-                  <img id="matchImage" src="https://scifanatic-wpengine.netdna-ssl.com/wp-content/uploads/2017/11/picard-415x640.jpg" alt="Match Profile Pic">
+                <div class="modal-body text-center">
+                  <h3>Name: <span id="friendName"></span></h3>
+                  <img id="friendPhoto" src="https://scifanatic-wpengine.netdna-ssl.com/wp-content/uploads/2017/11/picard-415x640.jpg" alt="Match Profile Pic">
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -176,15 +180,25 @@
                 var surveyResults = {
                     name: $("#name").val().trim(),
                     photo: $("#photo").val().trim(),
-                    "ques": [$("#q1").val(),$("#q2").val(),$("#q3").val(),$("#q4").val(),$("#q5").val(),$("#q6").val(),$("#q7").val(),$("#q8").val(),$("#q9").val(),$("#q10").val()]
+                    ques: [$("#q1").val(),
+                           $("#q2").val(),
+                           $("#q3").val(),
+                           $("#q4").val(),
+                           $("#q5").val(),
+                           $("#q6").val(),
+                           $("#q7").val(),
+                           $("#q8").val(),
+                           $("#q9").val(),
+                           $("#q10").val()
+                        ]
                 };
+                var currentURL = window.location.origin;
 
-                $.post("/api/friends", surveyResults, 
+                $.post(currentURL + "/api/friends", surveyResults, 
                   function(data) {
-                    console.log("Response: " + JSON.stringify(data));
-                    $("matchName").text(data.name);
-                    $("matchImage").attr("src", data.photo)
-                })
+                    $("#friendName").text(data.friendName);
+                    $("#friendPhoto").attr("src", data.friendPhoto);
+                });
                 $("#resultsModal").modal("show");
 
             })

@@ -6,22 +6,39 @@ module.exports = function(app) {
     });
 
     app.post("/api/friends", function(req, res) {
-        var perfectMatch = {
-            name: "",
-            image: "",
-            matchDifference: ""
-        };
-        
         var userResponse = req.body;
-        console.log("User Response " + JSON.stringify(userResponse));
-
-        var userResName = userResponse.name;
-        var userResPhoto = userResponse.photo;
+        var friendName = "";
+        var friendPhoto = "";
         var userResQues = userResponse.ques;
+        var perfectFriend = 10000;
 
-        var totalDifference = 0;
+       
+
+        for (var i=0; i < friendDataArray.length; i++) {
+            var totalDifference = 0;
+            for (var j=0; j < userResQues.length; j++) {
+                totalDifference += Math.abs(parseInt(userResQues[j]) - parseInt(friendDataArray[i].ques[j]));
+            }
+            if (totalDifference < perfectFriend) {
+                perfectFriend = totalDifference;
+                friendName = friendDataArray[i].name;
+                friendPhoto = friendDataArray[i].photo;
+            }
+            console.log("Friend Name: " + friendName);
+            console.log("Friend Photo:" + friendPhoto);
+        }
+
+        // console.log("Total Different is: " + totalDifference);
+        // console.log("Quest Length: " + userResQues.length);
+        // console.log("Friends Data Array: " + friendDataArray.length);
         
         friendDataArray.push(userResponse);
+
+        res.json({
+            status: "OK",
+            friendName: friendName,
+            friendPhoto: friendPhoto
+        })
 
     });
 }

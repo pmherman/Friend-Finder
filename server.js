@@ -7,7 +7,7 @@ var app = express();
 var PORT = process.env.PORT || 8000;
 
 //Setup for Body parser
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 //Setup for local CSS Use
