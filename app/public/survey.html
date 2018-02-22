@@ -156,6 +156,11 @@
                 <button type="submit" class="btn btn-success btn-lg btn-block" id="submit"><span class="fa fa-check-circle" aria-hidden="true"></span> Submit</button>            
             </div>
         </div>
+        <br>
+        <footer class="text-center">
+            <a href="/api/friends">Friends API</a> | <a href="https://github.com/pmherman/friendfinder">GitHub</a>
+        </footer>
+        <br>
         <div id="resultsModal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -168,7 +173,7 @@
                   <img id="friendPhoto" src="https://scifanatic-wpengine.netdna-ssl.com/wp-content/uploads/2017/11/picard-415x640.jpg" alt="Match Profile Pic">
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  <button type="button" id="close" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
               </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -176,31 +181,46 @@
         <script type="text/javascript">
             $("#submit").on("click", function(e) {
                 e.preventDefault();
-
-                var surveyResults = {
-                    name: $("#name").val().trim(),
-                    photo: $("#photo").val().trim(),
-                    ques: [$("#q1").val(),
-                           $("#q2").val(),
-                           $("#q3").val(),
-                           $("#q4").val(),
-                           $("#q5").val(),
-                           $("#q6").val(),
-                           $("#q7").val(),
-                           $("#q8").val(),
-                           $("#q9").val(),
-                           $("#q10").val()
-                        ]
+                function validateForm() {
+                    var formValid = true;
+                    $(".form-control").each(function() {
+                        if ($(this).val() === "") {
+                            formValid = false;
+                        }
+                    })
+                    $(".chosen-select").each(function() {
+                        if ($(this).val() === "") {
+                            formValid = false;
+                        }
+                    })
                 };
-                var currentURL = window.location.origin;
+                if (validateForm() == true) {    
+                    var surveyResults = {
+                        name: $("#name").val().trim(),
+                        photo: $("#photo").val().trim(),
+                        ques: [$("#q1").val(),
+                            $("#q2").val(),
+                            $("#q3").val(),
+                            $("#q4").val(),
+                            $("#q5").val(),
+                            $("#q6").val(),
+                            $("#q7").val(),
+                            $("#q8").val(),
+                            $("#q9").val(),
+                            $("#q10").val()
+                            ]
+                    };
+                    var currentURL = window.location.origin;
 
-                $.post(currentURL + "/api/friends", surveyResults, 
-                  function(data) {
-                    $("#friendName").text(data.friendName);
-                    $("#friendPhoto").attr("src", data.friendPhoto);
-                });
-                $("#resultsModal").modal("show");
-
+                    $.post(currentURL + "/api/friends", surveyResults, 
+                    function(data) {
+                        $("#friendName").text(data.friendName);
+                        $("#friendPhoto").attr("src", data.friendPhoto);
+                    });
+                    $("#resultsModal").modal("show");
+                } else {
+                    alert("Please fill out the form to find your new best friend!");
+                }
             })
         </script>
     </body>
