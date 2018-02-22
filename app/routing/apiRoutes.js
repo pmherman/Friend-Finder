@@ -14,7 +14,7 @@ module.exports = function(app) {
 
        
 
-        for (var i=0; i < friendDataArray.length; i++) {
+        for (var i=0; i < 10; i++) {
             var totalDifference = 0;
             for (var j=0; j < userResQues.length; j++) {
                 totalDifference += Math.abs(parseInt(userResQues[j]) - parseInt(friendDataArray[i].ques[j]));

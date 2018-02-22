@@ -49,6 +49,10 @@
             #friendPhoto {
                 height: 320px;
             }
+
+            .error {
+                background-color: #ffa296;
+            }
        </style>
     </head>
     <body>
@@ -161,15 +165,33 @@
             <a href="/api/friends">Friends API</a> | <a href="https://github.com/pmherman/friendfinder">GitHub</a>
         </footer>
         <br>
+        <!-- Error Modal -->
+        <div id="errorModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="error modal-content">
+                <div class="modal-header text-center">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Friend Finder Alert:</h4>
+                </div>
+                <div class="modal-body text-center">
+                  <h3>Please fill out the form completely to continue.</h3>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="close" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->  
+        <!-- Results Modal -->
         <div id="resultsModal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header text-center">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title">Your Perfect Friend:</h4>
+                  <h4 class="modal-title">Friend Finder Alert:</h4>
                 </div>
                 <div class="modal-body text-center">
-                  <h3>Name: <span id="friendName"></span></h3>
+                  <h3 id="friendName"></h3>
                   <img id="friendPhoto" src="https://scifanatic-wpengine.netdna-ssl.com/wp-content/uploads/2017/11/picard-415x640.jpg" alt="Match Profile Pic">
                 </div>
                 <div class="modal-footer">
@@ -193,6 +215,7 @@
                             formValid = false;
                         }
                     })
+                    return formValid;
                 };
                 if (validateForm() == true) {    
                     var surveyResults = {
@@ -214,12 +237,12 @@
 
                     $.post(currentURL + "/api/friends", surveyResults, 
                     function(data) {
-                        $("#friendName").text(data.friendName);
+                        $("#friendName").text("Your Perfect Friend is: " + data.friendName);
                         $("#friendPhoto").attr("src", data.friendPhoto);
                     });
                     $("#resultsModal").modal("show");
                 } else {
-                    alert("Please fill out the form to find your new best friend!");
+                    $("#errorModal").modal("show");
                 }
             })
         </script>
