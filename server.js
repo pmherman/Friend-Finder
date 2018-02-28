@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 //Setup for local CSS Use
-app.use(express.static('public'))
+app.use(express.static("public"));
 
 //Routes
 require("./app/routing/apiRoutes")(app);

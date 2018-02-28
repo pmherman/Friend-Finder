@@ -44,3 +44,11 @@ body {
     color: red;
     font-weight: bolder;
 }
+
+#friendPhoto {
+    height: 320px;
+}
+
+.error {
+    background-color: #ffa296;
+}
